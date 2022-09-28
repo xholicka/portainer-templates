@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  helloworld:
+    image: hello-world:latest
+    container_name: helloworld
+    restart: unless-stopped
