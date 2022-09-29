@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  wpdb:
+    image: lscr.io/linuxserver/mariadb:latest
+    volumes:
+      - /srv/wordpress-db:/config
+    restart: always
+    container_name: wpdb
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/Prague
+      MYSQL_ROOT_PASSWORD: a3l5fF451seghhd@#L9gnrD
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: vFsadlkj345Ssdp4
+
+  wordpress:
+    depends_on:
+      - wpdb
+    image: wordpress:latest
+    container_name: wordpress
+    volumes:
+      - /srv/wordpress-data:/var/www/html
+#      - ./wordpress.ini:/usr/local/etc/php/conf.d/wordpress.ini
+    ports:
+      - "8000:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: wpdb
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: vFsadlkj345Ssdp4
+      WORDPRESS_DB_NAME: wordpress
+
+  phpmyadmin:
+    depends_on:
+      - wpdb
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      #- PMA_HOST=wpdb
+      #- PMA_VERBOSE=wp-database
+      #- PMA_USER=wordpress
+      #- PMA_PASSWORD=vFsadlkj345Ssdp4
+      - HIDE_PHP_VERSION=true
+    restart: always
+    ports:
+      - 9001:80
+    volumes:
+      - /sessions
