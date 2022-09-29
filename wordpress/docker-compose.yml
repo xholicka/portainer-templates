@@ -11,10 +11,12 @@ services:
       PUID: 1000
       PGID: 1000
       TZ: Europe/Prague
-      MYSQL_ROOT_PASSWORD: a3l5fF451seghhd@#L9gnrD
+      MYSQL_ROOT_PASSWORD: a3l5fF451seghhdL9gnrD
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: vFsadlkj345Ssdp4
+    ports:
+      - "3306:3306"
 
   wordpress:
     depends_on:
@@ -39,11 +41,11 @@ services:
     image: phpmyadmin:latest
     container_name: phpmyadmin
     environment:
-      - PMA_ARBITRARY=1
-      #- PMA_HOST=wpdb
-      #- PMA_VERBOSE=wp-database
-      #- PMA_USER=wordpress
-      #- PMA_PASSWORD=vFsadlkj345Ssdp4
+      #- PMA_ARBITRARY=1
+      - PMA_HOST=wpdb
+      - PMA_VERBOSE=wpdb
+      - PMA_USER=wordpress
+      - PMA_PASSWORD=vFsadlkj345Ssdp4
       - HIDE_PHP_VERSION=true
     restart: always
     ports:
