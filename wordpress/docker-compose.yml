@@ -47,6 +47,6 @@ services:
       - HIDE_PHP_VERSION=true
     restart: always
     ports:
-      - 9001:80
+      - 9101:80
     volumes:
       - /sessions
